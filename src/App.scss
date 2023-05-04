@@ -1,0 +1,232 @@
+html {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  .head{
+    .search-icon{
+      position: absolute;
+      z-index: 1;
+      top: 20px;
+      left: 170px;
+    }
+    input{
+      outline: none;
+      border: 0.25px solid transparent;
+      border-radius: 4px;
+      padding: 6px;
+      padding-left: 50px;
+      position: relative;
+      background: #d3ecff;
+      width: 300px; 
+      top: 2.75px;
+      left: 20px;
+      &:hover, &:focus{
+        background: #ffffff;
+        border: 0.25px solid gray;
+      }
+    }
+    .reset{
+      background: rgb(255, 82, 82);
+      position: relative;
+      border-radius: 8px;
+      left: 30px;
+      height: 35px;
+      width: 35px;
+      color: white;
+      &:hover{
+        background: white;
+        border: 1px solid rgb(255, 82, 82);
+        color: rgb(255, 82, 82);
+      }
+    }
+  }
+  .table {
+    overflow: hidden;
+    .MuiDataGrid-columnHeaders{
+      background: rgb(211, 232, 239);
+    }
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .MuiTablePagination-selectLabel{
+      margin-top: 13.5px;
+    }
+    .MuiTablePagination-displayedRows{
+      margin-top: 16px;
+    }
+    .MuiFormControlLabel-root{
+      margin-left: 20px;
+    }
+  }
+}
+
+.action-buttons{
+  .MuiSvgIcon-root{
+    color: #1a1645;
+    width: 22px;
+  }
+}
+
+.add-wrapper{
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 200;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.326);
+  .add {
+    display: flex;
+    justify-content: center;
+    .close{
+      background: rgb(255, 82, 82);
+      border-radius: 50px;
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      z-index: 1;
+      .MuiSvgIcon-root{
+        color: white;
+      }
+    }
+    .add-card {
+      position: absolute;
+      z-index: 100;
+      background: white;
+      top: 14%;
+      gap: 10px;
+      display: grid;
+      grid-template: repeat(1,1fr)/repeat(2,1fr);
+      justify-content: center;
+      border-radius: 5px;
+      box-shadow: black 0px 0px 2px 0px;
+      padding: 20px 20px;
+      label{
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: 700;
+        font-size: 14px;
+        color: black;
+        margin-left: 3px;
+      }
+      .MuiInputBase-input{
+        outline: none;
+        border: none;
+        background: transparent;
+        margin-top: 1px;
+      }
+      .MuiInputBase-root{
+        outline: none;
+        border: none;
+        background: transparent;
+        margin-top: 2px;
+      }
+      .MuiSelect-select{
+        padding: 3.5px;
+        padding-left: 10px;
+      }
+      input{
+        background-color: white;
+        border-radius: 3px;
+        outline: none;
+        border: 1px solid rgb(199, 199, 199);
+        height: 32px;
+        width: 300px;
+        padding: 10px 10px;
+         
+      }
+      .buttons{
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        left: 450px;
+        margin-top: 10px;
+        gap: 20px;
+        .submit{
+          position: relative;
+        }
+      }
+    }
+  }
+  
+}
+
+.view-card{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.326);
+  .close{
+    background: rgb(255, 82, 82);
+    border-radius: 50px;
+    position: absolute;
+    top: 100px;
+    left: 975px;
+    z-index: 101;
+    .MuiSvgIcon-root{
+      color: white;
+    }
+  }
+  .view{
+    display: grid;
+    grid-template: repeat(1,1fr)/repeat(3,1fr) ;
+    position: absolute;
+    z-index: 100;
+    gap: 0;
+    background: white;
+    width: 700px;
+    top: 20%;
+    left: 23%;
+    padding: 20px 20px;
+    border-radius: 8px;
+    label{
+      font-weight: 700;
+    }
+    span{
+      position: relative;
+      left: 15px;
+    }
+    .data{
+      position: relative;
+      right: 25px;
+      width: 500px;
+    }
+  }
+}
+
+.table {
+  .styled-table thead tr {
+    border-radius: 8px;
+    background-color: #4295a5;
+    color: #ffffff;
+    text-align: left;
+  }
+  .styled-table th,
+  .styled-table td {
+    padding: 2px 5px;
+    
+    height: 40px;
+    overflow: hidden;
+  }
+  .styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+
+  .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+
+  .styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #4295a5;
+    // border-bottom: 2px solid #1f1956;
+  }
+}
