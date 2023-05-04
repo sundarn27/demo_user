@@ -16,18 +16,18 @@ import rows from "../data.json";
 
 export default function Add(props) {
   const [visible, setVisible] = useState(true);
-  let id = rows.length + 1;
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [position, setPosition] = useState("");
-  const [description, setDescription] = useState("");
-  const [status, setStatus] = useState(false);
-  const [myData, setMyData] = useState({
-    rows
-  });
-
-  console.log(myData)
+  // const randomId = (Math.random() * 1).toString()
+  console.log(randomId)
+  const initialState={
+    id:0,
+    name:'',
+    email:'',
+    phone:'',
+    position:'',
+    description:'',
+    status:false,
+  }
+  const [personDtl,setPersonDtl]=useState(initialState);
 
   const CancelButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(red[500]),
@@ -48,10 +48,6 @@ export default function Add(props) {
 
   const handleCancel = () => {
     setVisible(false);
-  };
-
-  const handleStatusChange = (event, newStatus) => {
-    setStatus(newStatus);
   };
 
   const IOSSwitch = styled((props) => (
@@ -126,22 +122,32 @@ export default function Add(props) {
   ];
 
   const handleSubmit = () => {
-    const newData =
-      {
-        id: id,
-        name: name,
-        email: email,
-        phone_no: phone,
-        position: position,
-        description: description,
-        status: status,
-      };
-    console.log(newData)
-    setMyData((prevState) => ({
-      ...prevState,
-      rows: [...prevState.rows, newData],
-    }));
-  };
+    const randomId = (Math.random() + 1).toString().slice(2, 10)
+    setPersonDtl((preg) => {
+      return {...preg, id: randomId }
+    })
+    console.log(personDtl)
+    // const newData =
+    //   {
+    //     id: id,
+    //     name: name,
+    //     email: email,
+    //     phone_no: phone,
+    //     position: position,
+    //     description: description,
+    //     status: status,
+    //   };
+      props.onAdd((preg) => {
+        return [...preg, personDtl]
+      })
+      setVisible(false);
+      setPersonDtl(initialState);
+      // setMyData((prevState) => {
+      //   let newOne = [...prevState.rows, newData];
+      //   props.onAdd(newOne)
+      //   return newOne;
+      // });
+    };
 
   return (
     <>
@@ -162,9 +168,11 @@ export default function Add(props) {
                 <OutlinedInput
                   sx={{ height: "3.5ch", padding: "0px" }}
                   placeholder="Please enter text"
-                  value={props.isEdit ? props.form.name : name}
+                  value={props.isEdit ? props.form.name : personDtl.name}
                   onChange={(e) => {
-                    setName(e.target.value);
+                    setPersonDtl((preg) => {
+                      return {...preg,name:e.target.value}
+                    });
                   }}
                 />
               </div>
@@ -176,9 +184,11 @@ export default function Add(props) {
                 <OutlinedInput
                   sx={{ height: "3.5ch", padding: "0px" }}
                   placeholder="Please enter text"
-                  value={props.isEdit ? props.form.email : email}
+                  value={props.isEdit ? props.form.email : personDtl.email}
                   onChange={(e) => {
-                    setEmail(e.target.value);
+                    setPersonDtl((preg) => {
+                      return {...preg,email:e.target.value}
+                    });
                   }}
                 />
               </div>
@@ -190,9 +200,11 @@ export default function Add(props) {
                 <OutlinedInput
                   sx={{ height: "3.5ch", padding: "0px" }}
                   placeholder="Please enter text"
-                  value={props.isEdit ? props.form.phone_no : phone}
+                  value={props.isEdit ? props.form.phone_no : personDtl.phone}
                   onChange={(e) => {
-                    setPhone(e.target.value);
+                    setPersonDtl((preg) => {
+                      return {...preg,phone:e.target.value}
+                    });
                   }}
                 />
               </div>
@@ -204,9 +216,11 @@ export default function Add(props) {
                 <TextField
                   id="outlined-select-currency"
                   select
-                  value={props.isEdit ? props.form.position : position}
+                  value={props.isEdit ? props.form.position : personDtl.position}
                   onChange={(e) => {
-                    setPosition(e.target.value);
+                    setPersonDtl((preg) => {
+                      return {...preg,position:e.target.value}
+                    });
                   }}
                   sx={{ width: "37ch" }}
                   className="dropdown"
@@ -229,9 +243,11 @@ export default function Add(props) {
                   rows={4}
                   sx={{ width: "37ch" }}
                   placeholder="Please enter text"
-                  value={props.isEdit ? props.form.description : description}
+                  value={props.isEdit ? props.form.description : personDtl.description}
                   onChange={(e) => {
-                    setDescription(e.target.value);
+                    setPersonDtl((preg) => {
+                      return {...preg,description:e.target.value}
+                    });
                   }}
                 />
               </div>
@@ -251,9 +267,11 @@ export default function Add(props) {
                 <FormControlLabel
                   control={<IOSSwitch sx={{ m: 1 }} />}
                   label=""
-                  checked={props.isEdit ? props.form.status : status}
+                  checked={props.isEdit ? props.form.status : personDtl.status}
                   onChange={(e) => {
-                    setStatus(e.target.checked); 
+                    setPersonDtl((preg) => {
+                      return {...preg,status:e.target.checked}
+                    }); 
                   }}
                 />
               </div>

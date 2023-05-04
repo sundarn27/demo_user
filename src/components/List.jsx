@@ -31,7 +31,9 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import CloseIcon from "@mui/icons-material/Close";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { useRef } from "react";
-import rows from '../data.json'
+import { DataArrayOutlined } from "@mui/icons-material";
+import myData from '../data.json';
+
 
 const useStyles = makeStyles({
   root: {
@@ -82,6 +84,8 @@ export default function List() {
     setView(false);
   };
 
+  const [newData, setNewData] = useState({});
+
   const columns = useMemo(
     () => [
       {
@@ -104,6 +108,7 @@ export default function List() {
       },
       {
         field: "phone_no",
+        type:"string",
         headerName: "PHONE NO",
         width: 130,
         headerClassName: "super-app-theme--header",
@@ -260,6 +265,8 @@ export default function List() {
   //       "Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.",
   //   },
   // ]);
+
+  const [rows, setRows] = useState(myData)
 
   const filteredRows = rows.filter((row) => {
     return searchTerm.toLowerCase() === ""
@@ -530,7 +537,9 @@ export default function List() {
             overflow: "hidden",
           }}
         />
-        {isVisible ? <Add isEdit={isEdit} /> : null}
+        {isVisible ? <Add isEdit={isEdit} 
+        onAdd = {setRows}
+        /> : null}
         {isEditVisible ? <Add isEdit={isEdit} form={form} /> : null}
       </div>
     </div>
