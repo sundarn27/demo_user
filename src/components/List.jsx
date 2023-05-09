@@ -58,6 +58,7 @@ export default function List() {
   const [isEdit, setIsEdit] = useState(false);
   const [form, setForm] = useState({});
   const [viewForm, setViewForm] = useState({});
+  const [deleteForm, setDeleteForm] = useState({});
   const [open, setOpen] = useState(false);
   const [view, setView] = useState(false);
   const theme = useTheme();
@@ -66,10 +67,10 @@ export default function List() {
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef();
 
-  const handleClickOpen = () => {
-    console.log("Open");
-    setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   console.log("Open");
+  //   setOpen(true);
+  // };
 
   const handleClickView = () => {
     console.log("Open");
@@ -374,7 +375,13 @@ export default function List() {
     );
   };
 
-  const DeleteDialog = () => {
+  const handleDelete = (idToDelete) => {
+    setRows(rows.filter((item) => item.id !== idToDelete));
+    setOpen(false)
+  };
+
+
+  const DeleteDialog = ( ) => {
     return (
       <div>
         <Dialog
@@ -390,7 +397,7 @@ export default function List() {
             <Button autoFocus onClick={handleClose}>
               Cancel
             </Button>
-            <Button sx={{ color: "red" }} onClick={handleClose} autoFocus>
+            <Button sx={{ color: "red" }} onClick={() => handleDelete(deleteForm.id)} autoFocus>
               Delete
             </Button>
           </DialogActions>
@@ -453,7 +460,11 @@ export default function List() {
         >
           <EditIcon />
         </IconButton>
-        <IconButton aria-label="delete" onClick={handleClickOpen}>
+        <IconButton aria-label="delete" onClick={() => {
+          console.log("Open");
+          setOpen(true);
+          setDeleteForm(params.params.row)
+        }} >
           <GridDeleteIcon />
         </IconButton>
         <IconButton
@@ -539,6 +550,7 @@ export default function List() {
         />
         {isVisible ? <Add isEdit={isEdit} 
         onAdd = {setRows}
+        rowVal={rows}
         /> : null}
         {isEditVisible ? <Add isEdit={isEdit} form={form} /> : null}
       </div>

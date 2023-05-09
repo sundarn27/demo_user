@@ -12,22 +12,21 @@ import { red, green } from "@mui/material/colors";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
-import rows from "../data.json";
 
 export default function Add(props) {
   const [visible, setVisible] = useState(true);
   // const randomId = (Math.random() * 1).toString()
-  console.log(randomId)
-  const initialState={
-    id:0,
-    name:'',
-    email:'',
-    phone:'',
-    position:'',
-    description:'',
-    status:false,
-  }
-  const [personDtl,setPersonDtl]=useState(initialState);
+
+  const initialState = {
+    id: props.rowVal.length + 1,
+    name: "",
+    email: "",
+    phone_no: "",
+    position: "",
+    description: "",
+    status: false,
+  };
+  const [personDtl, setPersonDtl] = useState(initialState);
 
   const CancelButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(red[500]),
@@ -122,11 +121,7 @@ export default function Add(props) {
   ];
 
   const handleSubmit = () => {
-    const randomId = (Math.random() + 1).toString().slice(2, 10)
-    setPersonDtl((preg) => {
-      return {...preg, id: randomId }
-    })
-    console.log(personDtl)
+    console.log(personDtl);
     // const newData =
     //   {
     //     id: id,
@@ -137,23 +132,23 @@ export default function Add(props) {
     //     description: description,
     //     status: status,
     //   };
-      props.onAdd((preg) => {
-        return [...preg, personDtl]
-      })
-      setVisible(false);
-      setPersonDtl(initialState);
-      // setMyData((prevState) => {
-      //   let newOne = [...prevState.rows, newData];
-      //   props.onAdd(newOne)
-      //   return newOne;
-      // });
-    };
+    props.onAdd((preg) => {
+      return [...preg, personDtl];
+    });
+    setVisible(false);
+    setPersonDtl(initialState);
+    // setMyData((prevState) => {
+    //   let newOne = [...prevState.rows, newData];
+    //   props.onAdd(newOne)
+    //   return newOne;
+    // });
+  };
 
   return (
     <>
       {visible ? (
         <div className="add-wrapper">
-          <div className="add" >
+          <div className="add">
             <div className="add-card">
               <div className="close">
                 <IconButton aria-label="delete" onClick={handleCancel}>
@@ -171,7 +166,7 @@ export default function Add(props) {
                   value={props.isEdit ? props.form.name : personDtl.name}
                   onChange={(e) => {
                     setPersonDtl((preg) => {
-                      return {...preg,name:e.target.value}
+                      return { ...preg, name: e.target.value };
                     });
                   }}
                 />
@@ -187,7 +182,7 @@ export default function Add(props) {
                   value={props.isEdit ? props.form.email : personDtl.email}
                   onChange={(e) => {
                     setPersonDtl((preg) => {
-                      return {...preg,email:e.target.value}
+                      return { ...preg, email: e.target.value };
                     });
                   }}
                 />
@@ -203,7 +198,7 @@ export default function Add(props) {
                   value={props.isEdit ? props.form.phone_no : personDtl.phone}
                   onChange={(e) => {
                     setPersonDtl((preg) => {
-                      return {...preg,phone:e.target.value}
+                      return { ...preg, phone: e.target.value };
                     });
                   }}
                 />
@@ -216,10 +211,12 @@ export default function Add(props) {
                 <TextField
                   id="outlined-select-currency"
                   select
-                  value={props.isEdit ? props.form.position : personDtl.position}
+                  value={
+                    props.isEdit ? props.form.position : personDtl.position
+                  }
                   onChange={(e) => {
                     setPersonDtl((preg) => {
-                      return {...preg,position:e.target.value}
+                      return { ...preg, position: e.target.value };
                     });
                   }}
                   sx={{ width: "37ch" }}
@@ -243,10 +240,14 @@ export default function Add(props) {
                   rows={4}
                   sx={{ width: "37ch" }}
                   placeholder="Please enter text"
-                  value={props.isEdit ? props.form.description : personDtl.description}
+                  value={
+                    props.isEdit
+                      ? props.form.description
+                      : personDtl.description
+                  }
                   onChange={(e) => {
                     setPersonDtl((preg) => {
-                      return {...preg,description:e.target.value}
+                      return { ...preg, description: e.target.value };
                     });
                   }}
                 />
@@ -270,8 +271,8 @@ export default function Add(props) {
                   checked={props.isEdit ? props.form.status : personDtl.status}
                   onChange={(e) => {
                     setPersonDtl((preg) => {
-                      return {...preg,status:e.target.checked}
-                    }); 
+                      return { ...preg, status: e.target.checked };
+                    });
                   }}
                 />
               </div>
